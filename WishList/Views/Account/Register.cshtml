@@ -2,21 +2,21 @@
 
     <h3>Registere New User</h3>
 <form asp-action="Register">
-    <div class="text-danger"></div>
+    <div class="text-danger" asp-validation-summary="All"></div>
     <dvi>
-        <label></label>
+        <label asp-for="Email"></label>
         <br/>
-        <input/>
+        <input asp-for="Email"/>
     </dvi>
     <div>
-        <label></label>
+        <label asp-for="Password"></label>
         <br/>
-        <input/>
+        <input asp-for="Password"/>
     </div>
     <div>
-        <label></label>
+        <label asp-for="ConfirmPassword"></label>
         <br/>
-        <input/>
+        <input asp-for="ConfirmPassword"/>
     </div>
     <div>
         <button type="submit">Register User</button>    
