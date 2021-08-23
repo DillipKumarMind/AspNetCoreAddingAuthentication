@@ -50,9 +50,6 @@ namespace WishList.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            if (!ModelState.IsValid)
-                return View();
-            else
                 return View();
         }
 
@@ -61,6 +58,15 @@ namespace WishList.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View();
+
+            var result = _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false,).Result;
+            if(!result.Succeeded)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(model);
+            }
             return RedirectToAction("Index", "Item");
         }
 
@@ -68,6 +74,7 @@ namespace WishList.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Logout()
         {
+            _signInManager.SignOutAsync();
             return RedirectToAction("Index","Home");
         }
     }
